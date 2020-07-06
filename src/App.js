@@ -54,7 +54,7 @@ class Example extends React.Component {
     return (
     <div className="Example">
       <div>
-      <button type="button" onClick={this.handleToggleReadOnly}>
+      <button type="button" onClick={this.handleEditable}>
        {this.state.readOnly ? "Editable" : "Read only"}
       </button> {" "}
       <Editor
