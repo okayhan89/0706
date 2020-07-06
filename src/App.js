@@ -4,6 +4,8 @@ import './App.css';
 import Editor from "rich-markdown-editor";
 import { debounce } from "lodash";
 import ReactDOM from "react-dom";
+import 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const element = document.getElementById("main");
 const savedText = localStorage.getItem("saved");
@@ -52,76 +54,57 @@ class Example extends React.Component {
     if (body) body.style.backgroundColor = this.state.dark ? "#181A1B" : "#FFF";
 
     return (
-    <div className="Example">
-      <div>
-      <button type="button" onClick={this.handleEditable}>
-       {this.state.readOnly ? "Editable" : "Read only"}
-      </button> {" "}
-      <Editor
-        id="example"
-        readOnly={this.state.readOnly}
-        value={this.state.value}
-        defaultValue={defaultValue}
-        handleDOMEvents={{
-          focus: () => console.log("FOCUS"),
-          blur: () => console.log("BLUR"),
-          paste: () => console.log("PASTE"),
-          touchstart: () => console.log("TOUCH START"),
-        }}
-        onChange={this.handleChange}
-        onCreateLink={title => {
-          // Delay to simulate time taken for remote API request to complete
-          return new Promise((resolve, reject) => {
-            setTimeout(() => {
-              if (title !== "error") {
-                return resolve(
-                  `/doc/${encodeURIComponent(title.toLowerCase())}`
-                );
-              } else {
-                reject("500 error");
-              }
-            }, 1500);
-          });
-        }}
-        dark={this.state.dark}
-        autoFocus
-      />
-      </div>
-    </div>
-  
-  )
-}
-  
+      <div className="container">
+        <div class="row">
+
+        <div className="col-md-2">hihi</div>
+        <div className="col-md-10">
+          <div>
+            <button type="button" onClick={this.handleEditable}>
+              {this.state.readOnly ? "Editable" : "Read only"}
+            </button> {" "}
+            <Editor
+              id="example"
+              readOnly={this.state.readOnly}
+              value={this.state.value}
+              defaultValue={defaultValue}
+              handleDOMEvents={{
+                focus: () => console.log("FOCUS"),
+                blur: () => console.log("BLUR"),
+                paste: () => console.log("PASTE"),
+                touchstart: () => console.log("TOUCH START"),
+              }}
+              onChange={this.handleChange}
+              onCreateLink={title => {
+                // Delay to simulate time taken for remote API request to complete
+                return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                    if (title !== "error") {
+                      return resolve(
+                        `/doc/${encodeURIComponent(title.toLowerCase())}`
+                      );
+                    } else {
+                      reject("500 error");
+                    }
+                  }, 1500);
+                });
+              }}
+              dark={this.state.dark}
+              autoFocus
+            />
+          </div>
+        </div>
+
+        </div>
+        </div>
+    )
+  }
+
 
 
 }
 if (element) {
   ReactDOM.render(<Example />, element);
 }
-// function App() {
-//   return (
-//     <div className="App">
-//       {/* <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-        
-//       </header> */}
-//       <Editor
-//         id="example"
-//         readOnly=
-//       />
-//     </div>
-//   );
-// }
 
 export default Example;
